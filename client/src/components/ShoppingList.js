@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { PropTypes } from "prop-types";
 
-import uuid from 'uuid';
-
 import { connect } from "react-redux";
 import { getItems, deleteItem } from "../actions/itemActions";
 
@@ -22,21 +20,8 @@ class ShoppingList extends Component {
 
   render() {
     const { items } = this.props.item;
-    console.log(this.props.item.items);
     return (
       <Container>
-        <Button 
-          style={{ margin: '2rem 0' }}
-          onClick={() => {
-            const name = prompt('Enter new item');
-            if (name) {
-              this.setState(state => ({
-                items : [...state.items, { id : uuid.v4(), name }]
-              }))
-            }
-          }}>
-            Add Item
-        </Button>
         <ListGroup>
           {items.map(({id, name}) => {
             return (
