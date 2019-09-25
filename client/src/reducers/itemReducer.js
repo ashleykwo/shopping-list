@@ -17,7 +17,6 @@ const itemReducer = (state = initialState, action) => {
       break;
     case "DELETE_ITEM" : 
       return {
-        ...state,
         items : state.items.filter(item => item.id !== action.payload)
       };
     default :

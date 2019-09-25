@@ -5,20 +5,24 @@ import { PropTypes } from "prop-types";
 import uuid from 'uuid';
 
 import { connect } from "react-redux";
-import { getItems } from "../actions/itemActions";
+import { getItems, deleteItem } from "../actions/itemActions";
 
 const mapStateToProps = (state) => ({
   item : state.item
-})
+});
 
 class ShoppingList extends Component {
   componentDidMount() {
     this.props.getItems();
   }
 
+  onDeleteClick = id => {
+    this.props.deleteItem(id);
+  };
+
   render() {
     const { items } = this.props.item;
-    console.log(this.props.item);
+    console.log(this.props.item.items);
     return (
       <Container>
         <Button 
@@ -40,11 +44,7 @@ class ShoppingList extends Component {
                 { name }
                 <Button 
                   style={{ float: 'right' }}
-                  onClick={() => {
-                    this.setState(state => ({
-                      items : state.items.filter(item => item.id !== id)
-                    }))
-                  }}>×</Button>
+                  onClick={this.onDeleteClick.bind(this, id)}>×</Button>
               </ListGroupItem>
             )
           })}
@@ -59,4 +59,4 @@ ShoppingList.propTypes = {
   item : PropTypes.object.isRequired
 }
 
-export default connect(mapStateToProps, { getItems })(ShoppingList);
+export default connect(mapStateToProps, { getItems, deleteItem })(ShoppingList);
