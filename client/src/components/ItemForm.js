@@ -4,8 +4,6 @@ import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
 
-import uuid from 'uuid';
-
 const mapStateToProps = (state) => ({
   item : state.item
 });
@@ -15,7 +13,6 @@ class ItemForm extends Component {
     e.preventDefault();
 
     const newItem = {
-      id : uuid.v4(),
       name : this.state.name
     };
 

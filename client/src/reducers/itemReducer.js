@@ -1,17 +1,16 @@
-import uuid from 'uuid';
-
 const initialState = {
-  items : [
-    { id: uuid.v4(), name : 'steak'},
-    { id: uuid.v4(), name : 'chicken'},
-    { id: uuid.v4(), name : 'eggs'}
-  ]
+  items : [],
+  loading : false
 }
 
 const itemReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_ITEMS" :
-      return {...state};
+      return {
+        ...state,
+        items : action.payload,
+        loading : false
+      };
     case "ADD_ITEM" :
       return {
         ...state,
@@ -20,7 +19,12 @@ const itemReducer = (state = initialState, action) => {
     case "DELETE_ITEM" : 
       return {
         ...state,
-        items : state.items.filter(item => item.id !== action.payload)
+        items : state.items.filter(item => item._id !== action.payload)
+      };
+    case "ITEMS_LOADING" :
+      return {
+        ...state,
+        loading : true
       };
     default :
       return {...state};

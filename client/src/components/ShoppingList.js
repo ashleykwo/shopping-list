@@ -23,13 +23,13 @@ class ShoppingList extends Component {
     return (
       <Container>
         <ListGroup>
-          {items.map(({id, name}) => {
+          {items.map(({_id, name}) => {
             return (
-              <ListGroupItem key={ id }>
+              <ListGroupItem key={ _id }>
                 { name }
                 <Button 
                   style={{ float: 'right' }}
-                  onClick={this.onDeleteClick.bind(this, id)}>×</Button>
+                  onClick={this.onDeleteClick.bind(this, _id)}>×</Button>
               </ListGroupItem>
             )
           })}
